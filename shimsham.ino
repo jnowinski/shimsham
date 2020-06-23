@@ -1,3 +1,8 @@
+#include <Adafruit_DotStar.h> // install the Adafruit DotStar library via Tools | Manage Libraries
+
+// control the onboard RGB LED; technically, a strip with just one LED!
+Adafruit_DotStar strip = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
+
 // define your configuration settings 
 struct config{
   boolean do_blink;
@@ -13,6 +18,13 @@ struct config cfg = {
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+
+  // set the color of RGB LED
+  strip.begin();
+  //strip.setPixelColor(0, 0, 64, 0); //green
+  //strip.setPixelColor(0, 64, 0, 0); //red
+  strip.setPixelColor(0, 0, 0, 64); //blue    
+  strip.show();
 }
 
 void loop() {
