@@ -6,6 +6,26 @@
 // control the onboard RGB LED; technically, a strip with just one LED!
 Adafruit_DotStar strip = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
+// define a shimmy (a sequence of mouse movements)
+struct shimmy{
+  char *dx;         // (pointer to) array of char indicating x movements; -1, 0, or 1
+  char *dy;         // (pointer to) array of char indicating y movements; -1, 0, or 1
+  byte num_steps;   // number of steps in sequence; 1-255
+  byte repeat;      // number of times to repeat this sequence; 1-255
+  byte scale;       // scale factor for sequence movements, e.g. DX = dx*scale
+};
+
+// a rectangle shimmy example
+char dx_rectangle[] = {0, 0, 1, 0, 0, -1};
+char dy_rectangle[] = {1, 1, 0, -1, -1, 0};
+struct shimmy rectangle = {
+  dx_rectangle, // dx
+  dy_rectangle, // dy
+  6,            // count
+  1,            // repeat
+  10            // scale
+};
+
 // define your configuration settings 
 struct config{
   boolean do_mouse;     // move the mouse?
